@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+  </head>
+
+  <body>
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: sans-serif;
+      }
+
+      main {
+        display: flex;
+        flex-direction: row;
+      }
+
+      .sidebar {
+        background-color: #f9f9f9;
+        height: 100vh;
+        width: 250px;
+        padding: 2rem;
+        box-sizing: border-box;
+      }
+
+      input {
+        max-width: 150px;
+        margin-top: 20px;
+      }
+
+      .file-upload {
+        border: none;
+        color: #333;
+        font-weight: 400;
+        box-sizing: border-box;
+        font-size: 1rem;
+        margin: 0;
+        width: 100%;
+      }
+
+      .content {
+        padding: 1rem 5rem;
+        width: calc(100% - 250px);
+        float: left;
+      }
+
+      .hide {
+        display: none;
+      }
+
+      #file-list {
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        border: 2px solid #11111111;
+        border-radius: 5px;
+        width: 100%;
+      }
+
+      .link {
+        margin-bottom: 10px;
+      }
+
+    </style>
+
+    <script>
+      const fileUpload = function (event) {
+        event.preventDefault();
+        console.log(event);
+        const { target: { files: [file] } } = event;
+        const form = new FormData();
+        form.append('file', file);
+
+        // const uploadButtonElement = document.getElementById('file-upload-label');
+        // uploadButtonElement.className = "hide";
+        // const formSubmitButtonElement = document.getElementById('submit-button');
+        // formSubmitButtonElement.className = "";
+
+        fetch('/file', {
+          method: 'post',
+          body: form,
+        })
+          .then(response => response.json())
+          .then(data => {
+            updateFileList(data);
+          });
+      }
+    </script>
+
+    <main>
+      <div class="sidebar">
+        <div>
+          <label for="file" class="file-upload" id="file-upload-label">
+            <i class="fas fa-file-upload"></i>&nbsp;Upload file
+            <input type="file" id="file" name="file" class="hide" onchange="fileUpload(event)" />
+          </label>
+        </div>
+        <div id="submit-button" class="hide">
+          <input type="submit" class="file-upload" />
+        </div>
+      </div>
+
+      <div class="content">
+        <h2>Files</h2>
+        <div id="file-list"></div>
+      </div>
+    </main>
+
+    <script>
+      const fileListElement = document.getElementById("file-list");
+      /**
+       * Get all the available files
+       */
+      const updateFileList = function (files) {
+        let fileListString = "";
+        files.forEach(filePath => {
+          fileListString += `
+              <a class="link" href="/file/${filePath}">${filePath}</a>
+            `;
+        })
+        fileListElement.innerHTML = fileListString;
+      }
+
+      const getFiles = function () {
+        fetch('/list')
+          .then(response => response.json())
+          .then(data => {
+            updateFileList(data);
+          })
+      }
+      getFiles();
+    </script>
+  </body>
+
+
+</html>
