@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Filey</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Coda+Caption:800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Cousine:400,400i,700,700i&display=swap"
+      rel="stylesheet"
+    />
+    <link href="./index.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/f4357c5d62.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="title-bar">
+      <button id="close-button">
+        <i class="fas fa-power-off"></i>
+      </button>
+      <button id="minimize-button">
+        <i class="fas fa-minus"></i>
+      </button>
+      <button id="maximize-button">
+        <i class="fas fa-expand-alt"></i>
+      </button>
+    </div>
+    <div id="dropzone">
+      <h1 class="title"><span class="title-text">FILEY</span></h1>
+      <div class="border"></div>
+      <form>
+        <p>
+          Drop your files here
+          <ul id="file-list"></ul>
+        </p>
+        <input
+          type="file"
+          id="fileElem"
+          multiple
+          onchange="handleFiles(this.files)"
+        />
+      </form>
+    </div>
+
+    <script src="./web.js"></script>
+  </body>
+</html>

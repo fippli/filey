@@ -1,0 +1,81 @@
+body {
+  padding: 3%;
+  display: flex;
+  flex-direction: column;
+  -webkit-app-region: drag;
+  height: 100vh;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.title {
+  font-family: "Coda Caption", sans-serif;
+  letter-spacing: 10px;
+  font-size: 12vh;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+
+.title-text {
+  background-image: -webkit-linear-gradient(45deg, #ffc312, #c4e538);
+  color: transparent;
+  -webkit-background-clip: text;
+}
+
+#dropzone {
+  width: 100%;
+  flex: 1;
+  border: 3px dashed #f0f0f0;
+  border-radius: 10px;
+  margin: 0;
+  font-family: "Coda Caption";
+  text-align: center;
+  font-size: 2rem;
+  padding: 2% 10%;
+  box-sizing: border-box;
+  color: #e0e0e0;
+  position: relative;
+}
+
+.border {
+  width: 100%;
+  height: 7px;
+  background-image: -webkit-linear-gradient(45deg, #ffc312, #c4e538);
+  border-radius: 100px;
+}
+
+#fileElem {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+
+#file-list {
+  font-size: 1rem;
+  font-family: "Cousine", monospace;
+  text-align: left;
+  color: #222;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+#file-list li {
+  margin: 10px 0;
+}
+
+.title-bar {
+  margin-bottom: 20px;
+}
+
+.title-bar button {
+  font-size: 1.2rem;
+  color: #e0e0e0;
+  border: none;
+  cursor: pointer;
+}
+
+.title-bar button:hover {
+  color: #ffc312;
+}
